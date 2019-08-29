@@ -19,11 +19,11 @@
         /**
          *
          */
-        public const SANDBOX    = "SANDBOX";
+        const SANDBOX = "SANDBOX";
         /**
          *
          */
-        public const PRODUCTION = "PRODUCTION";
+        const PRODUCTION = "PRODUCTION";
 
         /**
          *
