@@ -12,7 +12,10 @@
   "minimum-stability": "dev",
   "autoload": {
     "psr-4": {
-      "Gateway\\": "src/"
+      "Gateway\\API": "src/gateway/API/"
+    },
+    "psr-0": {
+      "Gateway\\API": "src/gateway/API"
     }
   },
   "require": {
