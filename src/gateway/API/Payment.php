@@ -148,8 +148,9 @@
             return $this;
         }
 
+
         /**
-         * @return  \Gateway\API\Card
+         * @return bool
          */
         public function getTokenCard()
         {
