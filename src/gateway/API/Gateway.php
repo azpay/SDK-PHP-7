@@ -56,11 +56,15 @@ class Gateway
     {
         $authorize = new Authorize($transaction, $this->credential);
 
-        $token = new Tokenization($this->credential,
-            $transaction->getPayment()->getCard(),
-            $transaction->getCustomer());
-        $transaction->getPayment()->setTokenCard($token->getTokenCard());
+        if (empty($transaction->getPayment()->getTokenCard())) {
 
+            $token = new Tokenization($this->credential,
+                $transaction->getPayment()->getCard(),
+                $transaction->getCustomer());
+
+            $transaction->getPayment()->setTokenCard($token->getTokenCard());
+
+        }
 
         $request        = new Request($this->credential);
         $this->response = $request->post("/v1/receiver", $authorize->toJSON());
@@ -78,10 +82,16 @@ class Gateway
     {
         $sale = new Sale($transaction, $this->credential);
 
-        $token = new Tokenization($this->credential,
-            $transaction->getPayment()->getCard(),
-            $transaction->getCustomer());
-        $transaction->getPayment()->setTokenCard($token->getTokenCard());
+        if (empty($transaction->getPayment()->getTokenCard())) {
+
+            $token = new Tokenization($this->credential,
+                $transaction->getPayment()->getCard(),
+                $transaction->getCustomer());
+
+            $transaction->getPayment()->setTokenCard($token->getTokenCard());
+
+        }
+
 
         $request        = new Request($this->credential);
         $this->response = $request->post("/v1/receiver", $sale->toJSON());
