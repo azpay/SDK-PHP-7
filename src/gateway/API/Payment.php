@@ -21,7 +21,7 @@
         /**
          * @var
          */
-        private $tokenCard;
+        private $tokenCard = false;
         /**
          * @var
          */
