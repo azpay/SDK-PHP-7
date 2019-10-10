@@ -92,7 +92,6 @@ class Gateway
 
         }
 
-
         $request        = new Request($this->credential);
         $this->response = $request->post("/v1/receiver", $sale->toJSON());
 
