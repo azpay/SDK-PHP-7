@@ -21,9 +21,15 @@ abstract class Acquirers
     const PAYPAL_EXPRESS_CHECKOUT     = 8;
     const PAGSEGURO_CHECKOUT_EXPRESSO = 9;
     const BRADESCO                    = 10;
-    const BRADESCO_SHOPFACIL          = 19;
+    const ITAU_SHOPLINE               = 11;
+    const BANCO_DO_BRASIL             = 12;
+    const BANCO_DO_BRASIL             = 12;
+    const SANTANDER                   = 13;
+    const CAIXA_SEM_REGISTRO          = 14;
+    const CAIXA_SINCO                 = 15;
+    const CAIXA_SIGCB                 = 16;
+    const HSBC                        = 17;
     const BRADESCO_SHOPFACIL_BOLETO   = 18;
-    const ITAU_SHOPLINE               = 20;
     const STONE                       = 20;
     const GETNET                      = 22;
     const GLOBAL_PAYMENT              = 24;
@@ -36,5 +42,4 @@ abstract class Acquirers
     const WORLDPAY                    = 31;
     const GRANITO                     = 32;
     const AZPAY                       = 33;
-
 }
