@@ -174,6 +174,7 @@ class Gateway
     {
         $sale           = new Boleto($transaction, $this->credential);
         $request        = new Request($this->credential);
+
         $this->response = $request->post("/v1/receiver", $sale->toJSON());
 
         return $this;
@@ -237,36 +238,37 @@ class Gateway
      */
     public function getStatus()
     {
-        switch ($this->response["status"]) {
-            case "0":
-                return "WAITING FOR PAYMENT";
-            case "1":
-                return "AUTHENTICATED";
-            case "2":
-                return "UNAUTHORIZED";
-            case "3":
-                return "AUTHORIZED";
-            case "4":
-                return "UNAUTHORIZED";
-            case "5":
-                return "IN CANCELLING";
-            case "6":
-                return "CANCELLED";
-            case "7":
-                return "IN CAPTURING";
-            case "8":
-                return "AUTHORIZED";
-            case "9":
-                return "UNAUTHORIZED";
-            case "10":
-                return "RECURRING DONE";
-            case "11":
-                return "BOLETO";
-            case "12":
-            case "56":
-                return "PARTIAL CANCELLED";
+        if (isset($this->response["status"])) {
+            switch ($this->response["status"]) {
+                case "0":
+                    return "WAITING FOR PAYMENT";
+                case "1":
+                    return "AUTHENTICATED";
+                case "2":
+                    return "UNAUTHORIZED";
+                case "3":
+                    return "AUTHORIZED";
+                case "4":
+                    return "UNAUTHORIZED";
+                case "5":
+                    return "IN CANCELLING";
+                case "6":
+                    return "CANCELLED";
+                case "7":
+                    return "IN CAPTURING";
+                case "8":
+                    return "AUTHORIZED";
+                case "9":
+                    return "UNAUTHORIZED";
+                case "10":
+                    return "RECURRING DONE";
+                case "11":
+                    return "BOLETO";
+                case "12":
+                case "56":
+                    return "PARTIAL CANCELLED";
+            }
         }
-
         return "UNKNOWN";
     }
 
