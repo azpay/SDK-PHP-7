@@ -1,27 +1,3 @@
 <?php
 
-    include_once("vendor/brunopaz/php-sdk-gateway/src/gateway/API/Gateway.php");
-    include_once("vendor/brunopaz/php-sdk-gateway/src/gateway/API/Credential.php");
-    include_once("vendor/brunopaz/php-sdk-gateway/src/gateway/API/Transaction.php");
-    include_once("vendor/brunopaz/php-sdk-gateway/src/gateway/API/Order.php");
-    include_once("vendor/brunopaz/php-sdk-gateway/src/gateway/API/Payment.php");
-    include_once("vendor/brunopaz/php-sdk-gateway/src/gateway/API/Authorize.php");
-    include_once("vendor/brunopaz/php-sdk-gateway/src/gateway/API/Sale.php");
-    include_once("vendor/brunopaz/php-sdk-gateway/src/gateway/API/Customer.php");
-    include_once("vendor/brunopaz/php-sdk-gateway/src/gateway/API/Request.php");
-    include_once("vendor/brunopaz/php-sdk-gateway/src/gateway/API/Capture.php");
-    include_once("vendor/brunopaz/php-sdk-gateway/src/gateway/API/Cancel.php");
-    include_once("vendor/brunopaz/php-sdk-gateway/src/gateway/API/Report.php");
-    include_once("vendor/brunopaz/php-sdk-gateway/src/gateway/API/Card.php");
-    include_once("vendor/brunopaz/php-sdk-gateway/src/gateway/API/Acquirers.php");
-    include_once("vendor/brunopaz/php-sdk-gateway/src/gateway/API/Methods.php");
-    include_once("vendor/brunopaz/php-sdk-gateway/src/gateway/API/Brand.php");
-    include_once("vendor/brunopaz/php-sdk-gateway/src/gateway/API/Environment.php");
-    include_once("vendor/brunopaz/php-sdk-gateway/src/gateway/API/Currency.php");
-    include_once("vendor/brunopaz/php-sdk-gateway/src/gateway/API/Fraud.php");
-    include_once("vendor/brunopaz/php-sdk-gateway/src/gateway/API/Items.php");
-    include_once("vendor/brunopaz/php-sdk-gateway/src/gateway/API/Tokenization.php");
-    include_once("vendor/brunopaz/php-sdk-gateway/src/gateway/API/Rebill.php");
-    include_once("vendor/brunopaz/php-sdk-gateway/src/gateway/API/Boleto.php");
-    include_once("vendor/brunopaz/php-sdk-gateway/src/gateway/API/OnlineTransfer.php");
-    include_once("vendor/brunopaz/php-sdk-gateway/src/gateway/API/Paypal.php");
+include_once("../vendor/autoload.php");
