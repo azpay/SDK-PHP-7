@@ -21,6 +21,25 @@ try {
     ### CREATE A NEW TRANSACTION
     $transaction = new Transaction();
 
+
+    $customer = new Customer();
+    $customer->setCustomerIdentity("11111");
+    $customer->setCpf("94127918012");
+    //$customer->setCnpj("18303116000165")
+    $customer->setEmail("teste@teste.com");
+    $customer->setName("teste");
+
+    $card = new Card();
+    $card->setBrand(Brand::VISA);
+    $card->setCardHolder("Bruno paz");
+    $card->setCardNumber("2223000148400010");
+    $card->setCardSecurityCode("123");
+    $card->setCardExpirationDate("202001");
+
+    $token = new Tokenization($credential, $card, $customer);
+
+
+
     // Set ORDER
     $transaction->Order()
         ->setReference("ss")
@@ -55,21 +74,23 @@ try {
         ->setNumberOfPayments(1)
         ->setSoftDescriptor("Bruno paz")
         ->Split($split)
-        ->setTokenCard("a9925b8c4d1ccf7e168d93f4797e860f35c84f90d6064eec3e57e52dcfdf6195");
+        ->setTokenCard($token->getTokenCard());
 
 
-    // SET CUSTOMER
-    $transaction->Customer()
-        ->setCustomerIdentity("999999999")
-        ->setName("Bruno")
-        ->setCpf("306.282.848-02")
-        ->setCnpj("18303116000165")
-        ->setEmail("brunopaz@test.com");
+    /* // SET CUSTOMER
+     $transaction->setCustomer()
+         ->setCustomerIdentity("999999999")
+         ->setName("Bruno")
+         ->setCpf("94127918012")
+         ->setCnpj("18303116000165")
+         ->setEmail("brunopaz@test.com");*/
+
+    $transaction->setCustomer($customer);
 
     // SET FRAUD DATA OBJECT
     $transaction->FraudData()
         ->setName("Bruno Paz")
-        ->setDocument("30683882828")
+        ->setDocument("94127918012")
         ->setEmail("brunopaz@g.com")
         ->setAddress("Rua test")
         ->setAddress2("Apartamento 23")
@@ -97,8 +118,8 @@ try {
     $transaction->setUrlReturn("http://127.0.0.1:8989/return.php");
 
     // PROCESS - ACTION
-    $response = $gateway->sale($transaction);
-    //$response = $gateway->authorize($transaction);
+    //$response = $gateway->sale($transaction);
+    $response = $gateway->authorize($transaction);
     // REDIRECT IF NECESSARY (Debit uses)
 
 
