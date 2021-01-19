@@ -24,18 +24,19 @@ abstract class Acquirers
     const BRADESCO_SHOPFACIL          = 19;
     const BRADESCO_SHOPFACIL_BOLETO   = 18;
     const ITAU_SHOPLINE               = 20;
-    const STONE          = 20;
-    const GETNET         = 22;
-    const GLOBAL_PAYMENT = 24;
-    const FIRSTDATA      = 25;
-    const CIELO_V3       = 26;
-    const REDE_E_REDE    = 27;
-    const ADIQ           = 28;
-    const PAYPAL_PLUS    = 29;
-    const GETNET_V1      = 30;
-    const WORLDPAY       = 31;
-    const GRANITO        = 32;
-    const AZPAY          = 33;
-    const ZOOP           = 34;
+    const STONE                       = 20;
+    const GETNET                      = 22;
+    const GLOBAL_PAYMENT              = 24;
+    const FIRSTDATA                   = 25;
+    const CIELO_V3                    = 26;
+    const REDE_E_REDE                 = 27;
+    const ADIQ                        = 28;
+    const PAYPAL_PLUS                 = 29;
+    const GETNET_V1                   = 30;
+    const WORLDPAY                    = 31;
+    const GRANITO                     = 32;
+    const AZPAY                       = 33;
+    const ZOOP                        = 34;
+    const PAGSEGUROV4                 = 35;
 
 }
