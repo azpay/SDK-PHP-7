@@ -5,7 +5,7 @@ Modalidades de pagamentos:
 - Cartão de débito
 - Paypal Plus
 - Paypal Express Chekout
-- Pagseguro
+- Pagseguro V4.0
 - Boleto bancário (Bradesco Shop Fácil e Itaú Shopline)
 - Transferência eletronica bancária (Itaú Shopline)
 
@@ -260,7 +260,8 @@ $response = $gateway->Rebill($transaction);
 |WORLDPAY|Acquirers::WORLDPAY|      
 |GRANITO|Acquirers::GRANITO|      
 |AZPAY|Acquirers::AZPAY|                          
-|ZOOP|Acquirers::ZOOP|                          
+|ZOOP|Acquirers::ZOOP|     
+|PAGSEGURO V4.0|Acquirers::PAGSEGUROV4|                      
 
 ### Códigos das bandeiras de cartões
 |Nome|Constante|
@@ -288,7 +289,9 @@ $response = $gateway->Rebill($transaction);
 |A Vista (Crédito)|Methods::CREDIT_CARD_NO_INTEREST|         
 |Parcelamento loja (Crédito)|Methods::CREDIT_CARD_INTEREST_BY_MERCHANT|
 |Parcelamento Emissor (Crédito)|Methods::CREDIT_CARD_INTEREST_BY_ISSUER|  
-|Cartão de débito|Methods::DEBIT_CARD|
+|Cartão de crédito recorrente apenas CIELO|Methods::CIELO_SUBSCRIPTION_INITIAL|
+|Cartão de crédito recorrente apenas PAGSEGURO v4.0 (primeira cobrança)|Methods::PAGSEGUROV4_SUBSCRIPTION_INITIAL|
+|Cartão de crédito recorrente apenas PAGSEGURO v4.0 (demais cobranças)|Methods::PAGSEGUROV4_SUBSCRIPTION_SUBSEQUENT|
 
 ---
 ## Outros exemplos de modalidades de pagamentos
