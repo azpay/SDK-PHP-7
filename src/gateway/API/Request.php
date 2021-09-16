@@ -103,7 +103,11 @@
                 throw new Exception("Internal Server Error", CURLINFO_HTTP_CODE);
             }
             if (curl_getinfo($curl, CURLINFO_HTTP_CODE) >= 400) {
-                throw new Exception(htmlentities(json_decode($response)->result->error->details), CURLINFO_HTTP_CODE);
+                $message = json_decode($response)->result->error->details;
+                $message .= json_decode($response)->result->error->moreInfo;
+                $message = str_replace("<![CDATA[", " - ", $message);
+                $message = str_replace("]]>", " ", $message);
+                throw new Exception(htmlentities(strtoupper($message)), CURLINFO_HTTP_CODE);
             }
             if (!$response) {
                 print "URL ERROR";

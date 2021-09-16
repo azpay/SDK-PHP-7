@@ -1,12 +1,13 @@
 # Gateway de Pagamento - SDK PHP
 
 Modalidades de pagamentos:
+- PIX
 - Cartão de crédito
 - Cartão de débito
 - Paypal Plus
 - Paypal Express Chekout
 - Pagseguro V4.0
-- Boleto bancário (Bradesco Shop Fácil e Itaú Shopline)
+- Boleto bancário (Bradesco Shop Fácil, Itaú Shopline e AZPAY)
 - Transferência eletronica bancária (Itaú Shopline)
 
 Recursos disponíveis
@@ -14,6 +15,7 @@ Recursos disponíveis
 - Pagamentos agendados ( recorrências )
 - Análise de antifraude
 - Tokenização de cartões
+- Split de pagamentos (AZPAY)
 
 ---
 
@@ -22,8 +24,6 @@ Recursos disponíveis
  namespace Gateway\API;
 
     include_once "autoload.php";
-
-    use Exception as Exception;
 
     try {
         $credential = new Credential("{{INSERT_MERCHANT_ID}}", "{{INSERT_TOKEN}}", Environment::SANDBOX);
@@ -216,21 +216,42 @@ $response = $gateway->sale("{TransactionID}");
 ```
 
 ### Tranferência Bancária (Transfer)
+
 ```php
 $response = $gateway->OnlineTransfer($transaction);
 ```
 
 ### Boleto Bancário (Payment Bank Slip)
+
 ```php
 $response = $gateway->Boleto($transaction);
 ```
 
+### PIX
+
+```php
+    $transaction->Payment()
+            ->setAcquirer(Acquirers::AZPAY)
+            ->setCurrency(Currency::BRAZIL_BRAZILIAN_REAL_BRL)
+            ->setCountry("BRA")
+            ->setExpire("2021-09-17T23:00:00")
+            ->setFine(1.12)
+            ->setInterest(1.12)
+            ->setInstructions("PIX: Anuidade do serviço")
+            ->Split($split); //opcional
+            
+     $response = $gateway->Pix($transaction);
+
+```
+
 ### Paypal
+
 ```php
 $response = $gateway->Paypal($transaction);
 ```
 
 ### Pagamento agendado ( Recorrência)
+
 ```php
 $response = $gateway->Rebill($transaction);
 ```
@@ -303,8 +324,3 @@ $response = $gateway->Rebill($transaction);
 |Paypal|[source / example](examples/Paypal.php)|
 |Recorrência|[source / example](examples/Rebill.php)|
 |Transfência eletrônica|[source / example](examples/OnlineTransfer.php)|
-
-
-                
-
-

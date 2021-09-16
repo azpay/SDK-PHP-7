@@ -9,13 +9,14 @@
     namespace Gateway\API;
 
     use Exception;
+    use JsonSerializable;
 
     /**
      * Class Payments
      *
      * @package Gateway\API
      */
-    class Payment implements \JsonSerializable
+    class Payment implements JsonSerializable
     {
 
         /**
@@ -33,6 +34,11 @@
         /**
          * @var
          */
+        private $expire;
+        /**
+         * @var
+         */
+
         private $amount;
         /**
          * @var
@@ -72,10 +78,7 @@
          * @var
          */
         private $card;
-        /**
-         * @var
-         */
-        private $expire;
+
         /**
          * @var
          */
@@ -83,9 +86,9 @@
         /**
          * @var
          */
+        private $fine;
+        private $interest;
         private $instructions;
-
-        private $split;
 
 
         /**
@@ -446,12 +449,53 @@
 
             }
             $this->softDescriptor = $softDescriptor;
+
             return $this;
         }
 
-        public function Split(Array $split)
+        public function Split(array $split)
         {
             $this->split = $split;
+
+            return $this;
+        }
+
+        /**
+         * @return mixed
+         */
+        public function getFine()
+        {
+            return $this->fine;
+        }
+
+        /**
+         * @param mixed $fine
+         *
+         * @return Payment
+         */
+        public function setFine(float $fine)
+        {
+            $this->fine = $fine;
+
+            return $this;
+        }
+
+        /**
+         * @return mixed
+         */
+        public function getInterest()
+        {
+            return $this->interest;
+        }
+
+        /**
+         * @param mixed $interest
+         *
+         * @return Payment
+         */
+        public function setInterest(float $interest)
+        {
+            $this->interest = $interest;
 
             return $this;
         }

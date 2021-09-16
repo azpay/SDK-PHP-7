@@ -14,7 +14,7 @@
 
 
     try {
-        $credential = new Credential("1", "d41d8cd98f00b204e9800998ecf8427e",
+        $credential = new Credential("{{mechantID}}", "{{mechantKEY}}",
             Environment::SANDBOX);
         $gateway    = new Gateway($credential);
 
@@ -33,10 +33,10 @@
             ->setCurrency(Currency::BRAZIL_BRAZILIAN_REAL_BRL)
             ->setCountry("BRA")
             ->setNumberOfPayments(2)
-            ->setSoftDescriptor("Bruno paz")
+            ->setSoftDescriptor("NOMEDAEMPRESA")
             ->Card()
             ->setBrand(Brand::VISA)
-            ->setCardHolder("Bruno paz")
+            ->setCardHolder("Fulano de tal")
             ->setCardNumber("2223000148400010")
             ->setCardSecurityCode("123")
             ->setCardExpirationDate("202001");
@@ -45,7 +45,7 @@
         $transaction->Customer()
             ->setCustomerIdentity("999999999")
             ->setName("Bruno")
-            ->setCpf("306.282.848-02")
+            ->setCpf("106.182.848-01")
             ->setCnpj("18303116000165")
             ->setEmail("brunopaz@test.com");
 
@@ -109,4 +109,3 @@
     } catch (Exception $e) {
         print_r($e->getMessage());
     }
-

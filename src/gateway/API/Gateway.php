@@ -8,6 +8,8 @@
 
 namespace Gateway\API;
 
+use Exception;
+
 /**
  * Class Gateway
  *
@@ -50,7 +52,7 @@ class Gateway
      * @param Transaction $transaction
      *
      * @return $this
-     * @throws \Exception
+     * @throws Exception
      */
     public function Authorize(Transaction $transaction)
     {
@@ -76,7 +78,7 @@ class Gateway
      * @param Transaction $transaction
      *
      * @return $this
-     * @throws \Exception
+     * @throws Exception
      */
     public function Sale(Transaction $transaction)
     {
@@ -102,7 +104,7 @@ class Gateway
      * @param Transaction $transaction
      *
      * @return $this
-     * @throws \Exception
+     * @throws Exception
      */
     public function Rebill(Transaction $transaction)
     {
@@ -119,7 +121,7 @@ class Gateway
      * @param int null $amount
      *
      * @return $this
-     * @throws \Exception
+     * @throws Exception
      */
     public function Capture(string $transactionId, int $amount = null)
     {
@@ -136,7 +138,7 @@ class Gateway
      * @param int null $amount
      *
      * @return $this
-     * @throws \Exception
+     * @throws Exception
      */
     public function Cancel(string $transactionId, int $amount = null)
     {
@@ -153,7 +155,7 @@ class Gateway
      * @param string $transactionId
      *
      * @return $this
-     * @throws \Exception
+     * @throws Exception
      */
     public function Report(string $transactionId)
     {
@@ -168,23 +170,33 @@ class Gateway
      * @param Transaction $transaction
      *
      * @return $this
-     * @throws \Exception
+     * @throws Exception
      */
     public function Boleto(Transaction $transaction)
     {
-        $sale           = new Boleto($transaction, $this->credential);
-        $request        = new Request($this->credential);
+        $sale    = new Boleto($transaction, $this->credential);
+        $request = new Request($this->credential);
 
         $this->response = $request->post("/v1/receiver", $sale->toJSON());
 
         return $this;
     }
 
+    public function Pix(Transaction $transaction)
+    {
+        $sale           = new Pix($transaction, $this->credential);
+        $request        = new Request($this->credential);
+        $this->response = $request->post("/v1/receiver", $sale->toJSON());
+
+        return $this;
+    }
+
+
     /**
      * @param Transaction $transaction
      *
      * @return $this
-     * @throws \Exception
+     * @throws Exception
      */
     public function OnlineTransfer(Transaction $transaction)
     {
@@ -305,6 +317,8 @@ class Gateway
             return true;
         } elseif (isset($this->response["processor"]["urlReturn"])) {
             return true;
+        } elseif (isset($this->response["processor"]["urlPix"])) {
+            return true;
         } else {
             return false;
         }
@@ -339,6 +353,10 @@ class Gateway
             return $this->response["processor"]["Transfer"]["urlTransfer"];
         }
 
+        if (isset($this->response["processor"]["urlPix"])) {
+            return $this->response["processor"]["urlPix"];
+        }
+
         if (isset($this->response["processor"]["urlReturn"])) {
             return $this->response["processor"]["urlReturn"];
         }
@@ -352,7 +370,6 @@ class Gateway
     public function getBoletoUrl()
     {
 
-
         if (isset($this->response["processor"]["Boleto"]["details"]["urlBoleto"])) {
             return $this->response["processor"]["Boleto"]["details"]["urlBoleto"];
         }
@@ -362,6 +379,18 @@ class Gateway
         }
 
         return "";
+    }
+
+    /**
+     * @return array|mixed
+     */
+    public function getPixInfo()
+    {
+        if (isset($this->response["processor"]["urlPix"])) {
+            return $this->response["processor"];
+        }
+
+        return [];
     }
 
     /**
